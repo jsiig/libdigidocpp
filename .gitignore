@@ -1,0 +1,11 @@
+.vscode/
+macOS/
+openssl-3.0.8.tar.gz
+openssl-3.0.8/
+xalan_c-1.12.tar.gz
+xalan_c-1.12/
+xerces-c-3.2.4.tar.xz
+xerces-c-3.2.4/
+xml-security-c-2.0.4.tar.gz
+xml-security-c-2.0.4/
+.DS_Store
