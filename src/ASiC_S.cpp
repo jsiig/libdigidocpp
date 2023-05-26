@@ -198,8 +198,15 @@ bool ASiC_S::isContainerSimpleFormat(const string &path)
             if(readMimetype(iss) == MIMETYPE_ASIC_S)
                 return true;
         }
+        
         if(isTimestampedASiC_S(list))
             return true;
+
+        // Just trying things out
+        // if(none_of(list.cbegin(), list.cend(), [](const string &file) { return file.find("p7s") != string::npos; })) {
+        //     DEBUG("Check if ASiC/zip containter");
+        //     return false;
+        // }
     }
     catch(const Exception &)
     {

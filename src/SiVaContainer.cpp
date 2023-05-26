@@ -46,6 +46,8 @@
 
 #include <algorithm>
 #include <fstream>
+#include <iostream>
+
 
 using namespace digidoc;
 using namespace digidoc::util;
@@ -314,13 +316,19 @@ vector<DataFile *> SiVaContainer::dataFiles() const
 
 unique_ptr<Container> SiVaContainer::openInternal(const string &path)
 {
-    static const array supported {"pdf", "ddoc"};
+    // Log that we have made it here along with param
+    cout << "SiVaContainer::openInternal(" << path << ") entered method" << endl;
+
+    static const array supported {"pdf", "ddoc", "asics"};
     string ext = File::fileExtension(path);
+
     if(find(supported.cbegin(), supported.cend(), ext) == supported.cend())
         return {};
     try {
+        cout << "SiVaContainer::openInternal(" << path << ") try block in method" << endl;
         return unique_ptr<Container>(new SiVaContainer(path, ext, true));
     } catch(const Exception &e) {
+        cout << "SiVaContainer::openInternal(" << path << ") catch block in method" << endl;
         if(e.msg().find("Bad digest for DataFile") == 0)
             return unique_ptr<Container>(new SiVaContainer(path, ext, false));
         throw;

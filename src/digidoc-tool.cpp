@@ -580,6 +580,7 @@ static int open(int argc, char* argv[])
 
     unique_ptr<Container> doc;
     try {
+        // cout << "digidoc-tool.cpp open method try before Container::openPtr(path)" << endl;
         doc = Container::openPtr(path);
     } catch(const Exception &e) {
         cout << "Failed to parse container" << endl;

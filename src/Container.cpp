@@ -29,6 +29,8 @@
 #include "crypto/X509CertStore.h"
 #include "util/File.h"
 #include "util/log.h"
+#include <iostream>
+
 
 DIGIDOCPP_WARNING_PUSH
 DIGIDOCPP_WARNING_DISABLE_CLANG("-Wnull-conversion")
@@ -349,12 +351,25 @@ Container* Container::open(const string &path)
  */
 unique_ptr<Container> Container::openPtr(const string &path)
 {
+    // Hackilyy bypass method
+    return SiVaContainer::openInternal(path);
+
+    // cout << "Container.cpp before for loop" << endl;
     for(auto open: m_openList)
     {
-        if(unique_ptr<Container> container = open(path))
+        // cout << "Container.cpp inside for loop" << endl;
+        if(unique_ptr<Container> container = open(path)) {
+            // cout << "inside if statement" << endl;
             return container;
+        }
+        // cout << "Container.cpp after if statement" << endl;
     }
-    return ASiC_E::openInternal(path);
+
+    // cout << "Container.cpp after for loop" << endl;
+
+
+    //return SiVaContainer::openInternal(path);
+    //return ASiC_E::openInternal(path);
 }
 
 /**
